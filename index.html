@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<HTML>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width ,initial-scale = 1.0">
+    <title>rock papper scissor</title>
+    <style type="text/css">
+      body{
+        background-color: black;
+        user-select: none;
+      }
+      #yall{
+        max-width: 100%;
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(220deg, #fff, #000, green);
+        border-radius: 12px;
+        text-align: center;
+      }
+      #playarea{
+        width: 250px;
+        height: 200px;
+        margin: 0px auto;
+        background-color: #f6f6f6;
+        border: 1px solid #d0d0d0;
+        border-radius: 12px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      #comp{
+        display: flex;
+        margin: 20px auto;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+      }
+      #person{
+        width: 100px;
+        height: 100px;
+        background-color: #ddd;
+        border-radius: 6px;
+        border: 1px solid #000;
+      }
+      #person img{
+        width: 100px;
+        height: 100px;
+        border-radius: 6px;
+      }
+      #spon_area{
+        width: 100px;
+        height: 100px;
+        background-color: #ddd;
+        border-radius: 6px;
+        border: 1px solid #000;
+       
+      }
+      #spon_area img{
+        width: 100px;
+        height: 100px;
+        border-radius: 6px;
+      }
+      button{
+        background-color: blue;
+        border: none;
+        outline: none;
+        border-radius: 8px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 20px;
+      }
+      span{
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+        line-height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="yall">
+      <span>you luck: &nbsp</span><span id="computer"></span></br>
+      <span>choice: &nbsp</span><span id="me"></span><br/>
+      <span>lucky score: &nbsp</span><span id="score"></span>
+      <div id="playarea">
+        <div id="comp">
+          <div id="person"></div>
+          <div id="spon_area"></div>
+        </div>
+        <div id="btnholder">
+        <button onclick="rock()">rock</button>
+        <button onclick="paper()">paper</button>
+        <button onclick="scissor()">scissor</button>
+      </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      let me = document.getElementById('me');
+      let comp = document.getElementById('computer');
+      let score = document.getElementById('score');
+      let scorevalue = 0;
+      
+      let playing = false;
+      
+      function spon(){
+        document.getElementById('spon_area').innerHTML = "";
+        
+        let images = ['papper.jpg','rock.jpg','scissor.jpg'];
+        
+        let num = Math.floor(Math.random() * images.length);
+        let tile = document.createElement('img');
+        tile.src= images[num]; 
+        document.getElementById('spon_area').append(tile);
+      
+        
+        if(me.innerHTML == "p" && num == 0 || me.innerHTML == "r" && num == 1 || me.innerHTML == "s" && num == 2){
+          comp.innerHTML = "draw";
+          comp.style.color = "green";
+        }else if(me.innerHTML == "r" && num == 2 || me.innerHTML == "s" && num == 0 || me.innerHTML == "p" && num == 1){
+          comp.innerHTML = "lucky";
+          comp.style.color = "blue";
+          score.innerHTML = scorevalue += 1;
+        }else{
+          comp.innerHTML = "unlucky"
+          comp.style.color = "red";
+          if(scorevalue >= 1){
+            score.innerHTML = scorevalue -= 1;
+          }
+        }
+        
+      
+      }
+      function paper(){
+        document.getElementById('person').innerHTML = "";
+        let papper = document.createElement('img');
+        papper.src = "papper.jpg";
+        document.getElementById('person').append(papper);
+        me.innerHTML = "p";
+        
+        spon();
+        
+      }
+      function scissor(){
+        document.getElementById('person').innerHTML = "";
+        let scissor = document.createElement('img');
+        scissor.src = "scissor.jpg";
+        document.getElementById('person').append(scissor);
+        me.innerHTML = "s";
+        
+        spon();
+        
+      }
+      function rock(){
+        document.getElementById('person').innerHTML = "";
+        let rock = document.createElement('img');
+        rock.src = "rock.jpg";
+        document.getElementById('person').append(rock);
+        me.innerHTML = "r";
+        spon();
+        
+      }
+     
+    </script>
+  </body>
+</HTML>
